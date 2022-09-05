@@ -1,4 +1,4 @@
-// todo add the releative functionality in linux operating system
+
 #define _PAGENATION_CONSTANT 1048576
 #define _WRITER_DOUBLE_DIGIT 15
 // hello world program
