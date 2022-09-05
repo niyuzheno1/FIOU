@@ -47,3 +47,7 @@ testCan/
 FIOU.dir/
 CMakeFiles/
 .vscode/
+
+FIOU
+Makefile
+*/output.txt

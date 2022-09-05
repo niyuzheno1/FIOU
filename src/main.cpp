@@ -6,6 +6,8 @@
 #else
     #include <unistd.h>
     #include <errno.h>
+    #include <string.h>
+    #include <linux/limits.h>
 #endif
 #include "utils.h"
 #include "enums.h"
@@ -29,11 +31,16 @@ char *readFrom(const char *fileName)
 
 bool ok(const char *a, const char *b)
 {
-    if (strcmp(a, b) == 0)
-    {
-        return true;
+    int value = 0;
+    for(size_t i = 0; ; ++i){
+        if(a[i] == 0 && b[i] == 0){
+            break;
+        }
+        if(a[i] != b[i]){
+            return false;
+        }
     }
-    return false;
+    return true;
 }
 
 template <typename T>
@@ -178,6 +185,7 @@ bool testCase9()
     fh.setGeneralReadMode();
     fh.check();
     char *buffer = new char[fh.getFileSize() + 2];
+    memset(buffer, 0, fh.getFileSize() + 2);
     fh.rdFile(buffer, false);
     fh.closeFile();
     return ok(buffer, readFrom("hello.cpp"));
@@ -416,13 +424,13 @@ bool results[] = {
 
 FileHandle fhstdin, fhstdout, fhstderr;
 
-void PathRemoveFileSpec(TCHAR *path)
+void PathRemoveFileSpec(GCHAR *path)
 {
-    TCHAR *last = NULL;
-    TCHAR *p = path;
+    GCHAR *last = NULL;
+    GCHAR *p = path;
     while (*p)
     {
-        if (*p == _TEXT('\\'))
+        if (*p == _TEXT('\\') || *p == _TEXT('/'))
             last = p;
         p++;
     }
@@ -440,7 +448,11 @@ int main()
         SetCurrentDirectory(szPath);
     #else 
         char szPath[PATH_MAX];
-        getcwd(szPath, PATH_MAX);
+        //change cwd to the directory of the executable 
+        readlink("/proc/self/exe", szPath, PATH_MAX);
+        PathRemoveFileSpec(szPath);
+        chdir(szPath);
+
     #endif
     FileHandle::FileSystemInit();
     for (int i = 0; i < sizeof(tests) / sizeof(testFunc); i++)

@@ -1,12 +1,14 @@
 #include "FileHandle.h"
+#ifdef _WIN32
 #include <io.h>
+#else 
+#include <stdio.h>
+#include <fcntl.h>
+#include <string.h>
+#include <math.h>
+#endif 
 #include <assert.h>
 
-// #include <stdio.h>
-// #include <fcntl.h>
-// #include <sys/stat.h>
-// #include <string.h>
-// #include <math.h>
 
 using namespace std;
 
@@ -143,6 +145,7 @@ char *FileHandle::readFromFile()
     char *buffer = this->buffer;
     if(buffer == nullptr){
         buffer = new char[readSize + 2];
+        memset(buffer, 0, readSize + 2);
     } 
 #ifdef _WIN32
     DWORD dwRead = 0;
@@ -293,7 +296,11 @@ bool FileHandle::specialChar(char c)
 
 bool FileHandle::eof()
 {
-    return this->bptr + this->filePointerOffset > this->getFileSize();
+    #ifdef _WIN32
+        return this->bptr + this->filePointerOffset > this->getFileSize();
+    #else
+        return this->bptr + this->filePointerOffset >= this->getFileSize();
+    #endif
 }
 
 void FileHandle::rd(char &c)

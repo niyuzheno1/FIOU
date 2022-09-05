@@ -4,6 +4,7 @@
 #else
 #include <unistd.h>
 #include <errno.h>
+#include <sys/stat.h>
 #endif
 #include <string>
 #include "./utils.h"
@@ -65,7 +66,7 @@ public:
     void wt_L(float x);
     void wt_L(double x);
     void wt_L(const char c[]);
-    void FileHandle::wt_L(std::string &x);
+    void wt_L(std::string &x);
     std::string getDerivedAccess();
 #if _WIN32
     HANDLE hWindowsHandle;
