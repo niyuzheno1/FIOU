@@ -21,5 +21,3 @@ add_executable(FIOU ${FIOU_SOURCE_FILES})
 target_include_directories(FIOU PUBLIC ${FIOU_HEADER_DIR})
 target_include_directories(FIOU PUBLIC ${FIOU_EXPORT_HEADER_DIR})
 
-
-add_custom_target (post_compilation_validation_windows COMMAND echo "TODO" )
