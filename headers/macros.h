@@ -1,0 +1,3 @@
+#pragma once
+#define _PAGENATION_CONSTANT 1048576
+#define _WRITER_DOUBLE_DIGIT 15
