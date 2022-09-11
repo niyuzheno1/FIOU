@@ -215,7 +215,7 @@ bool testCase10()
     rd(g);
     char h[100];
     rd(h);
-    string i;
+    tstring i;
     rd(i);
     fh.restoreRedirection();
     fh.closeFile();
@@ -240,7 +240,7 @@ bool testCase11()
     fh.setGeneralReadMode();
     fh.check();
     fh.redirectInto(FileHandle::stdHandleList[UNIFIED_FILE_IN_OUT_FLAGS::STDIN_FLAG]);
-    string line1;
+    tstring line1;
     char line2[100];
     rdLine(line1);
     rdLine(line2);
@@ -269,7 +269,7 @@ bool testCase12()
     char g = 'a';
     char h[100];
     strcpy(h, "ahahaha");
-    string i = "hahahah";
+    tstring i = "hahahah";
     wt_L(a);
     wt_L(" ");
     wt_L(b);
@@ -305,7 +305,7 @@ bool testCase12()
     float _f;
     char _g;
     char _h[100];
-    string _i;
+    tstring _i;
 
     rd(_a);
     rd(_b);
@@ -351,7 +351,7 @@ bool testCase13()
     char g = 'a';
     char h[100];
     strcpy(h, "ahahaha");
-    string i = "hahahah";
+    tstring i = "hahahah";
     dbwt_L(a);
     dbwt_L(" ");
     dbwt_L(b);
@@ -387,7 +387,7 @@ bool testCase13()
     float _f;
     char _g;
     char _h[100];
-    string _i;
+    tstring _i;
 
     rd(_a);
     rd(_b);

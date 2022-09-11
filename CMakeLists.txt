@@ -17,7 +17,14 @@ file(GLOB_RECURSE  FIOU_SOURCE_FILES
      "${FIOU_SOURCE_DIR}/*.c"
      )
 
+add_subdirectory(FIOU_Library)
+list(APPEND EXTRA_LIBS FIOU_Library)
+
+
 add_executable(FIOU ${FIOU_SOURCE_FILES})
 target_include_directories(FIOU PUBLIC ${FIOU_HEADER_DIR})
 target_include_directories(FIOU PUBLIC ${FIOU_EXPORT_HEADER_DIR})
+target_link_libraries(FIOU PUBLIC ${EXTRA_LIBS})
+target_include_directories(FIOU PUBLIC ${PROJECT_BINARY_DIR}/headers)
+
 

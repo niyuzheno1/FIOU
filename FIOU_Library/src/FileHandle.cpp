@@ -331,7 +331,7 @@ int FileHandle::rd(char c[])
     return sz;
 }
 
-void FileHandle::rd(string &x)
+void FileHandle::rd(tstring &x)
 {
     x.reserve(100);
     char firstx = 0;
@@ -372,7 +372,7 @@ int FileHandle::rdLine(char c[])
     return sz;
 }
 
-int FileHandle::rdLine(string &s)
+int FileHandle::rdLine(tstring &s)
 {
     s.reserve(100);
     char firstx = 0;
@@ -597,7 +597,7 @@ void *FileHandle::getStats()
     return &stas;
 }
 
-std::string FileHandle::getDerivedAccess(){
+tstring FileHandle::getDerivedAccess(){
     switch(this->flag){
         case UNIFIED_FILE_IN_OUT_FLAGS::STDIN_FLAG:
             return "r";
@@ -803,7 +803,7 @@ void FileHandle::wt_L(const char c[])
     for (i = 0; c[i] != '\0'; i++)
         this->putc(c[i]);
 }
-void FileHandle::wt_L(string &x)
+void FileHandle::wt_L(tstring &x)
 {
     if (pagnation == -1)
     {

@@ -1,4 +1,4 @@
-#include "FIleProcessingFunction.h"
+#include "FileProcessingFunction.h"
 #include "FileHandle.h"
 using namespace std;
 void rdFile(char *buffer, bool efficient ){

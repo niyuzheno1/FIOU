@@ -55,9 +55,9 @@ public:
     void rd(float &x);
     void rd(char &c);
     int rd(char c[]);
-    void rd(std::string &x);
+    void rd(tstring &x);
     int rdLine(char c[]);
-    int rdLine(std::string &s);
+    int rdLine(tstring &s);
     void wt_L(char a);
     void wt_L(int x);
     void wt_L(unsigned x);
@@ -66,8 +66,8 @@ public:
     void wt_L(float x);
     void wt_L(double x);
     void wt_L(const char c[]);
-    void wt_L(std::string &x);
-    std::string getDerivedAccess();
+    void wt_L(tstring &x);
+    tstring getDerivedAccess();
 #if _WIN32
     HANDLE hWindowsHandle;
 #else
