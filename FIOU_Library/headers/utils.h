@@ -1,5 +1,6 @@
 #pragma once
 //define misc platform specific constants/types/macros
+#define _USE_STD_STRING
 #ifdef _WIN32
 #define GCHAR TCHAR
 #define dword DWORD
@@ -18,3 +19,11 @@
 #endif
 
 const int STD_FILE_HANDLE_LIST_SIZE = 3;
+
+#ifdef _USE_STD_STRING
+#include <string>
+using tstring = std::string;
+#else
+//user define tstring
+//using tstring = std::string;
+#endif
