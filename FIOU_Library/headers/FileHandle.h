@@ -14,60 +14,62 @@ class FileHandle
 {
 public:
     FileHandle();
-    ~FileHandle();
-    void setFileName(const GCHAR *name);
-    void check();
-    void getHandle();
-    size_t getFileSize();
-    void restoreRedirection();
-    char *readFromFile();
-    size_t writeToFile(const char *buffer, int size);
-    void clear();
-    char getc();
-    void putc(char x);
-    void flush();
-    bool specialChar(char c);
-    bool eof();
-    void closeFile();
-    void setGeneralWriteMode();
-    void setGeneralReadMode();
+    virtual ~FileHandle();
+    virtual void setFileName(const GCHAR *name);
+    virtual void check();
+    virtual void getHandle();
+    virtual size_t getFileSize();
+    virtual void restoreRedirection();
+    virtual char *readFromFile();
+    virtual size_t writeToFile(const char *buffer, int size);
+    virtual void clear();
+    virtual char getc();
+    virtual void putc(char x);
+    virtual void flush();
+    virtual bool specialChar(char c);
+    virtual bool eof();
+    virtual void closeFile();
+    virtual void setGeneralWriteMode();
+    virtual void setGeneralReadMode();
+    virtual void setStdFileHandle(FILE *stream);
+    virtual int deriveFileNumber();
+    virtual const char *getFilePointerMode();
+    virtual int duplicateFileNumber();
+    virtual int duplicatedFIleNumberSingleAccess();
+    virtual void duplicatedOutOf(int fd);
+    virtual int openFileNumber(int mode);
+    virtual void *getStats();
+    virtual void redirectInto(FileHandle *handle);
+    virtual dword getStdHandleFlag();
+    virtual void getNativeAccessMode(void *_ret);
+    virtual void rdFile(char *buffer, bool efficient = true);
+    virtual void rd(int &x);
+    virtual void rd(unsigned &x);
+    virtual void rd(long long &x);
+    virtual void rd(unsigned long long &x);
+    virtual void rd(double &x);
+    virtual void rd(float &x);
+    virtual void rd(char &c);
+    virtual int rd(char c[]);
+    virtual void rd(tstring &x);
+    virtual int rdLine(char c[]);
+    virtual int rdLine(tstring &s);
+    virtual void wt_L(char a);
+    virtual void wt_L(int x);
+    virtual void wt_L(unsigned x);
+    virtual void wt_L(long long x);
+    virtual void wt_L(unsigned long long x);
+    virtual void wt_L(float x);
+    virtual void wt_L(double x);
+    virtual void wt_L(const char c[]);
+    virtual void wt_L(tstring &x);
+    virtual  tstring getDerivedAccess();
+
     static void FileSystemInit();
     static void FileSystemClose();
-    void setStdFileHandle(FILE *stream);
-    int deriveFileNumber();
-    const char *getFilePointerMode();
-    int duplicateFileNumber();
-    int duplicatedFIleNumberSingleAccess();
-    void duplicatedOutOf(int fd);
-    int openFileNumber(int mode);
-    void *getStats();
-    void redirectInto(FileHandle *handle);
-    dword getStdHandleFlag();
-    void getNativeAccessMode(void *_ret);
     static int writerDigit_double();
     static void writerDigit_double(int d);
-    void rdFile(char *buffer, bool efficient = true);
-    void rd(int &x);
-    void rd(unsigned &x);
-    void rd(long long &x);
-    void rd(unsigned long long &x);
-    void rd(double &x);
-    void rd(float &x);
-    void rd(char &c);
-    int rd(char c[]);
-    void rd(tstring &x);
-    int rdLine(char c[]);
-    int rdLine(tstring &s);
-    void wt_L(char a);
-    void wt_L(int x);
-    void wt_L(unsigned x);
-    void wt_L(long long x);
-    void wt_L(unsigned long long x);
-    void wt_L(float x);
-    void wt_L(double x);
-    void wt_L(const char c[]);
-    void wt_L(tstring &x);
-    tstring getDerivedAccess();
+
 #if _WIN32
     HANDLE hWindowsHandle;
 #else
@@ -76,7 +78,9 @@ public:
     static FileHandle *stdHandleList[STD_FILE_HANDLE_LIST_SIZE];
     size_t pagnation;
 
-private:
+    
+
+protected:
     template <typename T>
     inline void rdNumber(T &x, bool signedBy = true, bool isInteger = true);
     template <typename T>
