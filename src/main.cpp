@@ -13,6 +13,7 @@
 #include "enums.h"
 #include "macros.h"
 #include "fiou_library/export.h"
+#include "FIOUMemoryImplementor.h"
 using namespace std;
 
 
@@ -437,7 +438,7 @@ void PathRemoveFileSpec(GCHAR *path)
     if (last)
         *last = _TEXT('\0');
 }
-
+FIOUMemoryImplementor memoryImplementor;
 int main()
 {
     //get current running directory from process
@@ -454,6 +455,7 @@ int main()
         chdir(szPath);
 
     #endif
+    FileHandle::memoryInterface = &memoryImplementor;
     FileHandle::FileSystemInit();
     for (int i = 0; i < sizeof(tests) / sizeof(testFunc); i++)
     {
