@@ -15,7 +15,7 @@ using namespace std;
 size_t FileHandle::WRITER_DOUBLE_DIGIT;
 size_t FileHandle::PAGENATION_CONSTANT;
 FileHandle *FileHandle::stdHandleList[STD_FILE_HANDLE_LIST_SIZE];
-
+FIOUMemoryInterface *FileHandle::memoryInterface;
 
 FileHandle::FileHandle()
 {
@@ -144,7 +144,9 @@ char *FileHandle::readFromFile()
     size_t readSize = min(size, pagnation);
     char *buffer = this->buffer;
     if(buffer == nullptr){
-        buffer = new char[readSize + 2];
+        // buffer = new char[readSize + 2];
+        assert(memoryInterface != nullptr);
+        buffer = (char*)memoryInterface->allocate(readSize + 2);
         memset(buffer, 0, readSize + 2);
     } 
 #ifdef _WIN32
@@ -222,7 +224,8 @@ void FileHandle::putc(char x)
     }
     if (this->buffer == nullptr)
     {
-        this->buffer = new char[pagnation + 2];
+        assert(memoryInterface != nullptr);
+        this->buffer = (char*) memoryInterface->allocate( pagnation + 2);
     }
     this->buffer[this->bptr++] = x;
 }
@@ -447,9 +450,11 @@ void FileHandle::FileSystemInit()
 {
     PAGENATION_CONSTANT = _PAGENATION_CONSTANT;
     WRITER_DOUBLE_DIGIT = _WRITER_DOUBLE_DIGIT;
-    stdHandleList[UNIFIED_FILE_IN_OUT_FLAGS::STDIN_FLAG] = new FileHandle();
-    stdHandleList[UNIFIED_FILE_IN_OUT_FLAGS::STDOUT_FLAG] = new FileHandle();
-    stdHandleList[UNIFIED_FILE_IN_OUT_FLAGS::STDERR_FLAG] = new FileHandle();
+    
+    assert(memoryInterface != nullptr);
+    stdHandleList[UNIFIED_FILE_IN_OUT_FLAGS::STDIN_FLAG] = memoryInterface->newInstance<FileHandle>();
+    stdHandleList[UNIFIED_FILE_IN_OUT_FLAGS::STDOUT_FLAG] = memoryInterface->newInstance<FileHandle>();
+    stdHandleList[UNIFIED_FILE_IN_OUT_FLAGS::STDERR_FLAG] = memoryInterface->newInstance<FileHandle>();
 
 #ifdef _WIN32
     stdHandleList[UNIFIED_FILE_IN_OUT_FLAGS::STDIN_FLAG]->hWindowsHandle = GetStdHandle(STD_INPUT_HANDLE);
