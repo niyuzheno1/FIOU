@@ -8,7 +8,7 @@ include(FetchContent)
 FetchContent_Declare(
     MMS
     GIT_REPOSITORY https://github.com/niyuzheno1/MMS.git
-    GIT_TAG        8f813bc4301449b2fcdb81ba14b181211827e230 # release-1.0.0
+    GIT_TAG        33be400f59ff706e45f35d381063cbd20392344b
 )
 
 FetchContent_MakeAvailable(MMS)
