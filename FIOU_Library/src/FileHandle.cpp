@@ -11,11 +11,11 @@
 
 
 using namespace std;
-
+using namespace MMS;
 size_t FileHandle::WRITER_DOUBLE_DIGIT;
 size_t FileHandle::PAGENATION_CONSTANT;
 FileHandle *FileHandle::stdHandleList[STD_FILE_HANDLE_LIST_SIZE];
-FIOUMemoryInterface *FileHandle::memoryInterface;
+GenericMemoryManager *FileHandle::memoryInterface;
 
 FileHandle::FileHandle()
 {

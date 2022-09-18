@@ -13,8 +13,9 @@
 #include "enums.h"
 #include "macros.h"
 #include "fiou_library/export.h"
-#include "FIOUMemoryImplementor.h"
+#include "MMS/export.h"
 using namespace std;
+using namespace MMS;
 
 
 char *readFrom(const char *fileName)
@@ -438,7 +439,7 @@ void PathRemoveFileSpec(GCHAR *path)
     if (last)
         *last = _TEXT('\0');
 }
-FIOUMemoryImplementor memoryImplementor;
+SimpleMemoryManageInstance memoryImplementor;
 int main()
 {
     //get current running directory from process

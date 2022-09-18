@@ -10,7 +10,8 @@
 #include "./utils.h"
 #include "./enums.h"
 #include "./macros.h"
-#include "./FIOUMemoryInterface.h"
+#include "MMS/export.h"
+
 class FileHandle
 {
 public:
@@ -78,7 +79,7 @@ public:
 #endif
     static FileHandle *stdHandleList[STD_FILE_HANDLE_LIST_SIZE];
     size_t pagnation;
-    static FIOUMemoryInterface *memoryInterface;
+    static MMS::GenericMemoryManager *memoryInterface;
     
 
 protected:
