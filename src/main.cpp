@@ -12,7 +12,7 @@
 #include "utils.h"
 #include "enums.h"
 #include "macros.h"
-#include "fiou_library/export.h"
+#include "FIOU/export.h"
 #include "MMS/export.h"
 using namespace std;
 using namespace MMS;
