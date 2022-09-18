@@ -439,9 +439,15 @@ void PathRemoveFileSpec(GCHAR *path)
     if (last)
         *last = _TEXT('\0');
 }
-SimpleMemoryManageInstance memoryImplementor;
+//SimpleMemoryManageInstance memoryImplementor;
+SophiscatedMMInstance memoryImplementor;
+char tmem[1024 * 1024 * 96];
 int main()
 {
+    memoryImplementor.setInit([&](void ** p) {
+        *p = tmem;
+    });
+    memoryImplementor.memInit();
     //get current running directory from process
     #ifdef _WIN32
         TCHAR szPath[MAX_PATH];
