@@ -439,7 +439,7 @@ void PathRemoveFileSpec(GCHAR *path)
     if (last)
         *last = _TEXT('\0');
 }
-//SimpleMemoryManageInstance memoryImplementor;
+SimpleMemoryManageInstance _memoryImplementor;
 SophiscatedMMInstance memoryImplementor;
 char tmem[1024 * 1024 * 96];
 int main()
