@@ -12,9 +12,10 @@
 #include "utils.h"
 #include "enums.h"
 #include "macros.h"
-#include "fiou_library/export.h"
-#include "FIOUMemoryImplementor.h"
+#include "FIOU/export.h"
+#include "MMS/export.h"
 using namespace std;
+using namespace MMS;
 
 
 char *readFrom(const char *fileName)
@@ -438,9 +439,15 @@ void PathRemoveFileSpec(GCHAR *path)
     if (last)
         *last = _TEXT('\0');
 }
-FIOUMemoryImplementor memoryImplementor;
+SimpleMemoryManageInstance _memoryImplementor;
+SophiscatedMMInstance memoryImplementor;
+char tmem[1024 * 1024 * 96];
 int main()
 {
+    memoryImplementor.setInit([&](void ** p) {
+        *p = tmem;
+    });
+    memoryImplementor.memInit();
     //get current running directory from process
     #ifdef _WIN32
         TCHAR szPath[MAX_PATH];
