@@ -238,7 +238,6 @@ void FileHandle::flush()
     {
         this->writeToFile(this->buffer, this->bptr);
         this->bptr = 0;
-        this->buffer = nullptr;
     }
 }
 
